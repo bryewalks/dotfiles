@@ -1,25 +1,27 @@
+* {
+font-family: "CaskaydiaCove Nerd Font Mono";
+}
 window {
 margin: 0px;
-border: 1px solid #bd93f9;
-background-color: #282a36;
+background-color: @active-background;
 }
 
 #input {
-margin: 5px;
+margin: 10px;
 border: none;
 color: #f8f8f2;
 background-color: #44475a;
 }
 
 #inner-box {
-margin: 5px;
+margin: 10px;
 border: none;
 background-color: #282a36;
 }
 
 #outer-box {
-margin: 5px;
-border: none;
+border: 2px solid #bd93f9;
+border-radius: 15px;
 background-color: #282a36;
 }
 
@@ -35,7 +37,7 @@ color: #f8f8f2;
 } 
 
 #entry.activatable #text {
-color: #282a36;
+color: #f8f8f2;
 }
 
 #entry > * {
@@ -48,4 +50,12 @@ background-color: #44475a;
 
 #entry:selected #text {
 font-weight: bold;
+}
+
+#entry #text:hover {
+background-color: #44475a;
+}
+
+image {
+margin-right: 5px;
 }

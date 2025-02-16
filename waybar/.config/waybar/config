@@ -2,7 +2,7 @@
 	"layer": "top",
 	"modules-left": ["custom/launcher","cpu","memory","custom/media","tray"],
 	"modules-center": ["hyprland/workspaces"],
-	"modules-right": ["custom/updates","custom/wallpaper","backlight","pulseaudio","clock", "battery","custom/power"],
+	"modules-right": ["cava", "custom/updates","custom/wallpaper","backlight","pulseaudio","clock", "battery","custom/power"],
 	
 	"pulseaudio": {
 		"tooltip": false,
@@ -19,6 +19,18 @@
 		"num-tags": 6
     },
     // Modules configuration
+     "cava": {
+    "framerate": 120,
+    "autosens": 1,
+    "bars": 14,
+    "method": "pipewire",
+    "source": "auto",
+    "bar_delimiter": 0,
+    "input_delay": 2,
+    "sleep_timer": 2,
+    "hide_on_silence": true,
+    "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" 
+]},
      "hyprland/workspaces": {
          "disable-scroll": true,
          "all-outputs": true,

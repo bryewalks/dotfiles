@@ -146,6 +146,7 @@ window#waybar.hidden {
 	transition: none;
 	color: #161320;
 	background: #50FA7B;
+
 	/*background: #1A1826;*/
 }
 
@@ -181,7 +182,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #B5E8E0;
-	background: #161320;
+	background: #282a36;
 }
 
 #custom-launcher {
@@ -193,7 +194,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
     color: #8BE9FD;
-    background: #44475A;
+	background: #282a36;
 }
 
 #custom-power {
@@ -252,4 +253,10 @@ window#waybar.hidden {
 
 #workspaces button.urgent {
 	color: #F28FAD;
+}
+
+#cava {
+    color: #8BE9FD;
+    font-family: "bargraph";
+    font-size: 22px;
 }

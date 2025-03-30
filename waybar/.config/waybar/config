@@ -3,7 +3,7 @@
 	"modules-left": ["custom/launcher","cpu","memory","custom/media","tray"],
 	"modules-center": ["hyprland/workspaces"],
 	"modules-right": ["cava", "custom/updates","custom/wallpaper","backlight","pulseaudio","clock", "battery","custom/power"],
-	
+
 	"pulseaudio": {
 		"tooltip": false,
 		"scroll-step": 5,
@@ -29,7 +29,7 @@
     "input_delay": 2,
     "sleep_timer": 2,
     "hide_on_silence": true,
-    "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" 
+    "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"
 ]},
      "hyprland/workspaces": {
          "disable-scroll": true,
@@ -99,12 +99,12 @@
         "on-click": "playerctl play-pause"
     },
     "custom/launcher":{
-        "format": " ",
+        "format": "",
         "on-click": "rofi -show drun",
         "on-click-right": "killall rofi"
     },
     "custom/power":{
-        "format": " ",
+        "format": "",
         "on-click": "hyprctl dispatch exit",
         "on-click-middle": "shutdown -r now",
         "on-click-right": "shutdown -P now"
@@ -117,7 +117,7 @@
         "on-click": "kitty sudo pacman -Syu && notify-send 'System has been updated'"
     },
     "custom/wallpaper":{
-        "format":" ",
+        "format":"",
         "on-click": "bash ~/.config/system-scripts/wallpaper.sh"
     }
 }

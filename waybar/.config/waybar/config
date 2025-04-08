@@ -1,6 +1,6 @@
 {
 	"layer": "top",
-	"modules-left": ["custom/launcher","cpu","memory","custom/media","tray"],
+	"modules-left": ["custom/launcher","cpu","memory","custom/media","custom/snapshot","tray"],
 	"modules-center": ["hyprland/workspaces"],
 	"modules-right": ["cava", "custom/updates","custom/wallpaper","backlight","pulseaudio","clock", "battery","custom/power"],
 
@@ -119,5 +119,11 @@
     "custom/wallpaper":{
         "format":"",
         "on-click": "bash ~/.config/system-scripts/wallpaper.sh"
+    },
+    "custom/snapshot":{
+        "format":"",
+        "on-click": "hyprshot -m output",
+        "on-click-middle": "hyprshot -m window",
+        "on-click-right": "hyprshot -m region"
     }
 }

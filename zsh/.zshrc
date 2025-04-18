@@ -120,3 +120,4 @@ export PATH="$PATH:/home/brye/.lmstudio/bin"
 # tmuxifier
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"
+alias tmuxfr="tmuxifier"

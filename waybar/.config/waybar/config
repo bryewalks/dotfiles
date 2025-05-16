@@ -10,6 +10,7 @@
 		"format": "{icon} {volume}%",
 		"format-muted": " {volume}%",
 		"on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-middle": "systemctl --user restart pipewire",
 		"format-icons": {
 			"default": ["", "", ""]
 		}

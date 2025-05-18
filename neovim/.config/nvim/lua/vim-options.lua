@@ -20,24 +20,24 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move the highlighted line
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move the highlighted line(s) up" })
 
 -- Navigate vim panes better
-vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
-vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
-vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
-vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
+vim.keymap.set('n', '<c-k>', ':wincmd k<CR>', { desc = "Move to the pane above" })
+vim.keymap.set('n', '<c-j>', ':wincmd j<CR>', { desc = "Move to the pane below" })
+vim.keymap.set('n', '<c-h>', ':wincmd h<CR>', { desc = "Move to the pane left" })
+vim.keymap.set('n', '<c-l>', ':wincmd l<CR>', { desc = "Move to the pane right" })
 
 -- Rebind c-i to itself to distinguish between c-i and tab
 vim.keymap.set('n', '<c-i>', '<c-i>')
 
 -- System clipboard helpers
 -- Yank into system clipboard
-vim.keymap.set({'n', 'v'}, '<leader>y', '"+y') -- yank motion
-vim.keymap.set({'n', 'v'}, '<leader>Y', '"+Y') -- yank line
+vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = "yank to clipboard motion" })
+vim.keymap.set({'n', 'v'}, '<leader>Y', '"+Y', { desc = "yank to clipboard line" })
 -- Delete into system clipboard
-vim.keymap.set({'n', 'v'}, '<leader>d', '"+d') -- delete motion
-vim.keymap.set({'n', 'v'}, '<leader>D', '"+D') -- delete line
+vim.keymap.set({'n', 'v'}, '<leader>d', '"+d', { desc = "delete to clipboard motion" })
+vim.keymap.set({'n', 'v'}, '<leader>D', '"+D', { desc = "delete to clipboard line" })
 -- Paste from system clipboard
-vim.keymap.set('n', '<leader>p', '"+p')  -- paste after cursor
-vim.keymap.set('n', '<leader>P', '"+P')  -- paste before cursor
+vim.keymap.set('n', '<leader>p', '"+p', { desc = "paste from clipboard after cursor" })
+vim.keymap.set('n', '<leader>P', '"+P', { desc = "paste from clipboard before cursor" })
 
 vim.diagnostic.config({
   virtual_text = true,

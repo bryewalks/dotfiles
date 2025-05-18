@@ -9,6 +9,11 @@ return {
       desc = "Buffer",
     },
     {
+      "<leader>bw",
+      "<cmd>WhichKey<CR>",
+      desc = "Which Key",
+    },
+    {
       "<leader>b?",
       function()
         require("which-key").show({ global = false })

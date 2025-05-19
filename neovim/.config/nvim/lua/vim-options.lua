@@ -28,6 +28,10 @@ vim.keymap.set('n', '<c-l>', ':wincmd l<CR>', { desc = "Move to the pane right" 
 -- Rebind c-i to itself to distinguish between c-i and tab
 vim.keymap.set('n', '<c-i>', '<c-i>')
 
+-- Recenter the screen after <c-u> and <c-d>
+vim.keymap.set('n', '<c-u>', '<c-u>zz', { desc = "Scroll up half a page and recenter" })
+vim.keymap.set('n', '<c-d>', '<c-d>zz', { desc = "Scroll down half a page and recenter" })
+
 -- System clipboard helpers
 -- Yank into system clipboard
 vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = "yank to clipboard motion" })

@@ -31,6 +31,9 @@ vim.keymap.set('n', '<c-i>', '<c-i>')
 -- Recenter the screen after <c-u> and <c-d>
 vim.keymap.set('n', '<c-u>', '<c-u>zz', { desc = "Scroll up half a page and recenter" })
 vim.keymap.set('n', '<c-d>', '<c-d>zz', { desc = "Scroll down half a page and recenter" })
+--recenter the screen after searching
+vim.keymap.set('n', 'n', 'nzzzv', { desc = "Search next and recenter" })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = "Search previous and recenter" })
 
 -- System clipboard helpers
 -- Yank into system clipboard

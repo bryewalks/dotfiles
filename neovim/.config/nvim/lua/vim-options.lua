@@ -46,6 +46,9 @@ vim.keymap.set({'n', 'v'}, '<leader>D', '"+D', { desc = "delete to clipboard lin
 vim.keymap.set('n', '<leader>p', '"+p', { desc = "paste from clipboard after cursor" })
 vim.keymap.set('n', '<leader>P', '"+P', { desc = "paste from clipboard before cursor" })
 
+-- Close current buffer
+vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = "Close current buffer" })
+
 vim.diagnostic.config({
   virtual_text = true,
   signs = true,

@@ -7,6 +7,7 @@ return {
     dependencies = {
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
+      "mlaursen/vim-react-snippets",
     },
   },
   {
@@ -14,7 +15,11 @@ return {
     config = function()
       local luasnip = require("luasnip")
       local cmp = require("cmp")
+      require("vim-react-snippets").lazy_load()
       require("luasnip.loaders.from_vscode").lazy_load()
+
+      local reactSnippetsConfig = require("vim-react-snippets.config")
+      reactSnippetsConfig.readonly_props = false
 
       cmp.setup({
         snippet = {

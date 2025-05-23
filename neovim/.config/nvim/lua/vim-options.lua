@@ -49,6 +49,10 @@ vim.keymap.set('n', '<leader>P', '"+P', { desc = "paste from clipboard before cu
 -- Close current buffer
 vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = "Close current buffer" })
 
+-- Sort
+vim.keymap.set('v', '<leader>s', ':sort<CR>', { desc = "Sort visual selection" })
+vim.keymap.set('v', '<leader>S', ':sort!<CR>', { desc = "Sort visual selection in reverse" })
+
 vim.diagnostic.config({
   virtual_text = true,
   signs = true,

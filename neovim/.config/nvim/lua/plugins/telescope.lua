@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.8",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim", "ElPiloto/telescope-vimwiki.nvim" },
 		config = function()
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>f", "", { desc = "Find" })
@@ -11,6 +11,8 @@ return {
       vim.keymap.set("n", "<leader>ft", builtin.git_branches, { desc = "Find git branches" })
       vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
+			vim.keymap.set("n", "<leader>fv", "<Cmd>Telescope vimwiki live_grep<CR>", { desc = "Find vimwiki" })
+			vim.keymap.set("n", "<leader>fd", "<Cmd>TodoTelescope<CR><C-[>", { desc = "Find TODOs" })
 		end,
 	},
 	{
@@ -23,6 +25,7 @@ return {
 			})
 
 			require("telescope").load_extension("ui-select")
+			require("telescope").load_extension("vimwiki")
 		end,
 	},
 }

@@ -13,6 +13,8 @@ return {
 				visible = true,
 			},
 		},
+    popup_border_style = "rounded",
+    use_popups_for_input = false,
 	},
 	config = function(_, opts)
     require("neo-tree").setup(opts)

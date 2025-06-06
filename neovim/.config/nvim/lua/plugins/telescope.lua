@@ -13,6 +13,7 @@ return {
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
 			vim.keymap.set("n", "<leader>fv", "<Cmd>Telescope vimwiki live_grep<CR>", { desc = "Find vimwiki" })
 			vim.keymap.set("n", "<leader>fd", "<Cmd>TodoTelescope<CR><C-[>", { desc = "Find TODOs" })
+			vim.keymap.set("n", "<leader>fa", "<Cmd>Noice telescope<CR><C-[>", { desc = "Find Alerts" })
 		end,
 	},
 	{

@@ -18,6 +18,8 @@ vim.g.maplocalleader = "\\"
 -- Easier visual movements
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move the highlighted line(s) down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move the highlighted line(s) up" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent the highlighted line(s)" })
+vim.keymap.set("v", "<", "<gv", { desc = "Unindent the highlighted line(s)"})
 
 -- Navigate vim panes better
 vim.keymap.set('n', '<c-k>', ':wincmd k<CR>', { desc = "Move to the pane above" })

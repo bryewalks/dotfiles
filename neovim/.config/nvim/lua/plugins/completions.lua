@@ -77,6 +77,10 @@ return {
           { name = "buffer" },
         }),
       })
+
+      cmp.setup.filetype('typr', {
+          enabled = false
+      })
       --
       -- cmp.setup.cmdline({ "/", "?" }, {
       -- 	mapping = cmp.mapping.preset.cmdline(),

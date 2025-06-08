@@ -9,6 +9,11 @@ return {
       desc = "Buffer",
     },
     {
+      "<leader>o",
+      "",
+      desc = "Other",
+    },
+    {
       "<leader>bw",
       "<cmd>WhichKey<CR>",
       desc = "Which Key",

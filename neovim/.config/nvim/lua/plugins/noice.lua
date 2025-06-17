@@ -14,6 +14,9 @@ return {
 					filter = { event = "msg_showmode" },
 				},
 			},
+      presets = {
+        long_message_to_split = true,
+      }
 		})
 	end,
 }

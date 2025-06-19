@@ -11,6 +11,7 @@ return {
       vim.keymap.set("n", "<leader>ft", builtin.git_branches, { desc = "Find git branches" })
       vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
+			vim.keymap.set("n", "<leader>fs", builtin.spell_suggest, { desc = "Find spelling" })
 			vim.keymap.set("n", "<leader>fv", "<Cmd>Telescope vimwiki live_grep<CR>", { desc = "Find vimwiki" })
 			vim.keymap.set("n", "<leader>fd", "<Cmd>TodoTelescope<CR><C-[>", { desc = "Find TODOs" })
 			vim.keymap.set("n", "<leader>fa", "<Cmd>Noice telescope<CR><C-[>", { desc = "Find Alerts" })

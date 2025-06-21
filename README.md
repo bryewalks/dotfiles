@@ -1,6 +1,6 @@
 # Dotfiles Setup
 
-These dotfiles help you quickly configure your development environment on a Linux machine.
+These dotfiles help you quickly configure your development environment on a Arch based Linux machine.
 
 ## Clone the Repository
 

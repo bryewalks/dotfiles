@@ -7,7 +7,9 @@ These dotfiles help you quickly configure your development environment on a Linu
 Clone this repository **with submodules** to ensure all dependencies (such as plugin managers) are included:
 
 ```sh
-git clone --recurse-submodules https://github.com/yourusername/dotfiles.git ~/dotfiles
+git clone --recurse-submodules https://github.com/bryewalks/dotfiles.git ~/dotfiles
+```
+```
 cd ~/dotfiles
 ```
 > **Note:** The `--recurse-submodules` flag ensures any git submodules are also cloned.

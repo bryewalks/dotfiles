@@ -4,3 +4,6 @@
 [submodule "tmux/.tmuxifier"]
 	path = tmux/.tmuxifier
 	url = https://github.com/jimeh/tmuxifier.git
+[submodule "ohmyzsh/.oh-my-zsh"]
+	path = ohmyzsh/.oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git

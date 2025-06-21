@@ -1,0 +1,4 @@
+neovim/.config/nvim/lazy-lock.json
+tmux/.tmux/plugins/*
+!tmux/.tmux/plugins/tpm/
+!tmux/.tmux/plugins/tpm/**

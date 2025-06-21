@@ -11,6 +11,7 @@ DOTFILES_DIR="$HOME/dotfiles"
 OFFICIAL_PACKAGES=(
     base-devel
     bitwarden
+    discord
     fastfetch
     git
     helvum
@@ -21,6 +22,8 @@ OFFICIAL_PACKAGES=(
     hyprpaper
     hyprshot
     kitty
+    lsd
+    steam
     stow
     swaync
     tmux

@@ -15,6 +15,8 @@ vim.opt.guicursor = {
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+vim.opt.splitright = true
+
 -- Easier visual movements
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move the highlighted line(s) down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move the highlighted line(s) up" })

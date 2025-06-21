@@ -9,12 +9,12 @@
 
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun,run,filebrowser,window,vscode-recent";
+	modi:                       "drun,run,filebrowser,window";
     show-icons:                 true;
-    display-drun:               " Apps";
-    display-run:                " Run";
-    display-filebrowser:        " Files";
-    display-window:             " Windows";
+    display-drun:               "  Apps";
+    display-run:                "  Run";
+    display-filebrowser:        "  Files";
+    display-window:             "  Windows";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}"; 
 }
@@ -22,7 +22,7 @@ configuration {
 /*****----- Global Properties -----*****/
 
 * {
-	  font: "CaskaydiaCove 12, Nerd Font 12, Mono 12";
+	  font: "CaskaydiaCove Nerd Font 12";
     background:     #282A36FF;
     background-alt: #44475aFF;
     foreground:     #FFFFFFFF;
@@ -126,7 +126,7 @@ textbox-prompt-colon {
     enabled:                     true;
     padding:                     5px 0px;
     expand:                      false;
-    str:                         "";
+    str:                         " ";
     background-color:            inherit;
     text-color:                  inherit;
 }

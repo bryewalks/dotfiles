@@ -24,6 +24,7 @@ OFFICIAL_PACKAGES=(
     kitty
     lsd
     neovim
+    rofi
     steam
     stow
     swaync

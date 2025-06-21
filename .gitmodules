@@ -7,3 +7,15 @@
 [submodule "ohmyzsh/.oh-my-zsh"]
 	path = ohmyzsh/.oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule "ohmyzsh-plugins/.oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+	path = ohmyzsh-plugins/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "ohmyzsh-plugins/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
+	path = ohmyzsh-plugins/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "ohmyzsh-plugins/.oh-my-zsh/custom/themes/powerlevel10k"]
+	path = ohmyzsh-plugins/.oh-my-zsh/custom/themes/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "nvm/.nvm"]
+	path = nvm/.nvm
+	url = https://github.com/nvm-sh/nvm.git

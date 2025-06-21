@@ -18,6 +18,7 @@ OFFICIAL_PACKAGES=(
     hyprland
     hyprlock
     hyprpaper
+    hyprshot
     stow
     swaync
     tmux

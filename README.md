@@ -27,7 +27,7 @@ This script will automatically install necessary plugins for hyprland and unstow
 
 - Review the contents of `install.sh` before running.
 - Existing dotfiles may be overwritten. Backup if necessary.
-- Additional packages can be installed by modifying OFFICAL_PACKAGES or AUR_PACAKAGES in `install.sh`.
+- Additional packages can be installed by modifying OFFICIAL_PACKAGES (pacman) or AUR_PACKAGES (yay) in `install.sh`.
 
 ## Manual Installation with Stow
 

@@ -17,7 +17,9 @@ cd ~/dotfiles
 
 ## Automatic Hyprland Installation
 
-A script is provided to automate the setup process for Hyprland and dotfiles:
+A script is provided to automate the inital setup process for Hyprland and dotfiles:
+
+** Warning: This script should only be used for a fresh install or systems that were previously configured with these dotfiles. It will overwrite existing configurations. **
 
 ```sh
 ./install.sh

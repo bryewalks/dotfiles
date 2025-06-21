@@ -23,6 +23,7 @@ OFFICIAL_PACKAGES=(
     hyprshot
     kitty
     lsd
+    neovim
     steam
     stow
     swaync

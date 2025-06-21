@@ -22,6 +22,7 @@ OFFICIAL_PACKAGES=(
     hyprpaper
     hyprshot
     kitty
+    loupe
     lsd
     neovim
     rofi
@@ -31,13 +32,15 @@ OFFICIAL_PACKAGES=(
     tmux
     ttf-cascadia-code-nerd
     ttf-cascadia-mono-nerd
+    vlc
     zsh
 )
 
 # Define AUR packages
 AUR_PACKAGES=(
-    waybar-cava
     proton-mail-bin
+    stremio
+    waybar-cava
 )
 
 install_official_packages() {

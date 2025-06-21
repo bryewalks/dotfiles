@@ -10,6 +10,7 @@ DOTFILES_DIR="$HOME/dotfiles"
 # Define official repo packages
 OFFICIAL_PACKAGES=(
     base-devel
+    bitwarden
     fastfetch
     git
     helvum
@@ -19,6 +20,7 @@ OFFICIAL_PACKAGES=(
     hyprlock
     hyprpaper
     hyprshot
+    kitty
     stow
     swaync
     tmux

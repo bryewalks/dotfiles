@@ -12,6 +12,7 @@ OFFICIAL_PACKAGES=(
     base-devel
     bitwarden
     discord
+    dolphin
     fastfetch
     git
     helvum
@@ -153,6 +154,14 @@ reload_hyprland_if_running() {
     fi
 }
 
+additional_setup() {
+    echo "🔄 Performing additional setup tasks..."
+    # Add any additional setup tasks here
+    # For example, you might want to set up a wallpaper, configure Hyprland settings, etc.
+    kbuildsycoca6  # Rebuild KDE service cache needed for dolphin to recognize new applications
+    echo "✅ Additional setup tasks completed."
+}
+
 
 # Main logic
 install_official_packages
@@ -162,6 +171,7 @@ clone_dotfiles_if_missing
 unstow_dotfiles
 start_tmux_and_install_plugins
 install_node
+additional_setup
 reload_hyprland_if_running
 set_zsh_as_default
 

@@ -9,6 +9,7 @@ DOTFILES_DIR="$HOME/dotfiles"
 
 # Define official repo packages
 OFFICIAL_PACKAGES=(
+    archlinux-xdg-menu
     base-devel
     bitwarden
     discord
@@ -21,6 +22,7 @@ OFFICIAL_PACKAGES=(
     hyprland
     hyprlock
     hyprpaper
+    hyprpolkitagent
     hyprshot
     kitty
     loupe
@@ -34,6 +36,7 @@ OFFICIAL_PACKAGES=(
     ttf-cascadia-code-nerd
     ttf-cascadia-mono-nerd
     vlc
+    xdg-desktop-portal-hyprland
     zsh
 )
 

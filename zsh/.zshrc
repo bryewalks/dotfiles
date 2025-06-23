@@ -121,7 +121,12 @@ export PATH="$PATH:/home/brye/.lmstudio/bin"
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"
 alias tmuxfr="tmuxifier"
+
+# Show nerd icons when using ls
 alias ls="lsd"
+
+# Use nvim as default sudoedit
+export SUDO_EDITOR="nvim"
 
 # gems
 export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"

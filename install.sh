@@ -25,9 +25,11 @@ OFFICIAL_PACKAGES=(
     hyprpolkitagent
     hyprshot
     kitty
+    kvantum
     loupe
     lsd
     neovim
+    network-manager-applet
     rofi
     steam
     stow

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 shopt -s nullglob
-files=($(dirname "$0")/../hyprland.*.conf)
+files=(~/.config/hypr/hyprland.*.conf)
 shopt -u nullglob
 
 if [ ${#files[@]} -eq 0 ]; then

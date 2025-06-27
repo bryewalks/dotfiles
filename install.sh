@@ -46,7 +46,7 @@ OFFICIAL_PACKAGES=(
 AUR_PACKAGES=(
     proton-mail-bin
     stremio
-    # waybar-cava
+    waybar-cava
 )
 
 install_official_packages() {

@@ -74,7 +74,7 @@ install_yay_if_missing() {
 
 install_aur_packages() {
     echo "📦 Installing AUR packages via yay..."
-    yay -S --noconfirm "${AUR_PACKAGES[@]}"
+    yay -Syu --noconfirm "${AUR_PACKAGES[@]}"
     echo "✅ AUR packages installed."
 }
 

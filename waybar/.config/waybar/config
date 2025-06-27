@@ -1,26 +1,90 @@
 {
-	"layer": "top",
-	"modules-left": ["custom/launcher","cpu","memory","custom/media","custom/snapshot","tray"],
-	"modules-center": ["hyprland/workspaces"],
-	"modules-right": ["cava", "custom/updates","custom/wallpaper","backlight","pulseaudio","clock", "battery","custom/power"],
+  "layer": "top",
+  "modules-left": [
+    "custom/launcher",
+    "cpu",
+    "memory",
+    "custom/media",
+    "custom/snapshot",
+    "tray"
+  ],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "cava",
+    "custom/updates",
+    "custom/wallpaper",
+    "backlight",
+    "pulseaudio",
+    "clock",
+    "battery",
+    "custom/power"
+  ],
 
-	"pulseaudio": {
-		"tooltip": false,
-		"scroll-step": 5,
-		"format": "{icon}  {volume}%",
-		"format-muted": " {volume}%",
-		"on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
-    "on-click-middle": "systemctl --user restart pipewire",
-		"format-icons": {
-			"default": ["", "", ""]
-		}
-	},
-
-    "river/tags": {
-		"num-tags": 6
+  // Modules Left
+  "custom/launcher":{
+    "format": "",
+    "on-click": "rofi -show drun",
+    "on-click-right": "killall rofi"
+  },
+  "cpu": {
+    "interval": 15,
+    "format": " {}%",
+    "max-length": 10
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {}%",
+    "max-length": 10
+  },
+  "custom/media": {
+    "interval": 30,
+    "format": "{icon} {}",
+    "return-type": "json",
+    "max-length": 20,
+    "format-icons": {
+      "spotify": " ",
+      "default": " "
     },
-    // Modules configuration
-     "cava": {
+    "escape": true,
+    "exec": "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null",
+    "on-click": "playerctl play-pause"
+  },
+  "custom/snapshot":{
+    "format":"",
+    "on-click": "hyprshot -m output",
+    "on-click-middle": "hyprshot -m window",
+    "on-click-right": "hyprshot -m region"
+  },
+  "tray":{
+    "icon-size":18,
+    "spacing": 10
+  },
+  "network": {
+    "tooltip": false,
+    "format-wifi": "  {essid}",
+    "format-ethernet": ""
+  },
+
+  // Modules Center
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "warp-on-scroll": false,
+    "format": "{icon}",
+    "format-icons": {
+      "urgent": "",
+      "active": "",
+      "default": ""
+    },
+  },
+  "river/tags": {
+    "num-tags": 6
+  },
+
+  // Modules Right
+  "cava": {
     "framerate": 120,
     "autosens": 1,
     "bars": 14,
@@ -30,101 +94,58 @@
     "input_delay": 2,
     "sleep_timer": 2,
     "hide_on_silence": true,
-    "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"
-]},
-     "hyprland/workspaces": {
-         "disable-scroll": true,
-         "all-outputs": true,
-         "warp-on-scroll": false,
-         "format": "{icon}",
-         "format-icons": {
-             "urgent": "",
-             "active": "",
-             "default": ""
-         },
-     },
-	"network": {
-		"tooltip": false,
-		"format-wifi": "  {essid}",
-		"format-ethernet": ""
-	},
-	"backlight": {
-		"tooltip": false,
-		"format": " {}%",
-		"interval":1,
-        "on-scroll-up": "light -A 5",
-		"on-scroll-down": "light -U 5"
-	},
-    "battery": {
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 20
-        },
-        "format": "{icon}  {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""]
-    },
-	"tray":{
-		"icon-size":18,
-		"spacing": 10
-	},
-    "clock": {
-        "format": "  {:%H:%M}",
-        "format-alt": "{:%a %b %d}",
-        "tooltip": false
-    },
-    "cpu": {
-        "interval": 15,
-        "format": " {}%",
-        "max-length": 10
-    },
-    "memory": {
-        "interval": 30,
-        "format": " {}%",
-        "max-length": 10
-    },
-    "custom/media": {
-        "interval": 30,
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 20,
-        "format-icons": {
-            "spotify": " ",
-            "default": " "
-        },
-        "escape": true,
-        "exec": "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null",
-        "on-click": "playerctl play-pause"
-    },
-    "custom/launcher":{
-        "format": "",
-        "on-click": "rofi -show drun",
-        "on-click-right": "killall rofi"
-    },
-    "custom/power":{
-        "format": "",
-        "on-click": "hyprctl dispatch exit",
-        "on-click-middle": "shutdown -r now",
-        "on-click-right": "shutdown -P now"
-    },
-    "custom/updates":{
-        "format": "{} Update(s)",
-        "exec": "checkupdates | wc -l",
-        "exec-if": "[[ $(checkupdates | wc -l) != 0 ]]",
-        "interval": 15,
-        "on-click": "kitty sudo pacman -Syu && notify-send ' 󰀦     System has been updated !'"
-    },
-    "custom/wallpaper":{
-        "format":"",
-        "on-click": "bash ~/.config/system-scripts/wallpaper.sh"
-    },
-    "custom/snapshot":{
-        "format":"",
-        "on-click": "hyprshot -m output",
-        "on-click-middle": "hyprshot -m window",
-        "on-click-right": "hyprshot -m region"
+    "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+  },
+  "custom/updates":{
+    "format": "{} Update(s)",
+    "exec": "checkupdates | wc -l",
+    "exec-if": "[[ $(checkupdates | wc -l) != 0 ]]",
+    "interval": 15,
+    "on-click": "kitty sudo pacman -Syu && notify-send ' 󰀦     System has been updated !'"
+  },
+  "custom/wallpaper":{
+    "format":"",
+    "on-click": "bash ~/.config/system-scripts/wallpaper.sh"
+  },
+  "backlight": {
+    "tooltip": false,
+    "format": " {}%",
+    "interval":1,
+    "on-scroll-up": "light -A 5",
+    "on-scroll-down": "light -U 5"
+  },
+  "pulseaudio": {
+    "tooltip": false,
+    "scroll-step": 5,
+    "format": "{icon}  {volume}%",
+    "format-muted": " {volume}%",
+    "on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-middle": "systemctl --user restart pipewire",
+    "format-icons": {
+      "default": ["", "", ""]
     }
+  },
+  "clock": {
+    "format": "  {:%H:%M}",
+    "format-alt": "{:%a %b %d}",
+    "tooltip": false
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 20
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "custom/power":{
+    "format": "",
+    "on-click": "hyprctl dispatch exit",
+    "on-click-middle": "shutdown -r now",
+    "on-click-right": "shutdown -P now"
+  },
 }

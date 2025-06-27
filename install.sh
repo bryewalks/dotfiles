@@ -46,7 +46,7 @@ OFFICIAL_PACKAGES=(
 AUR_PACKAGES=(
     proton-mail-bin
     stremio
-    waybar-cava
+    # waybar-cava
 )
 
 install_official_packages() {
@@ -149,6 +149,16 @@ install_node() {
     fi
 }
 
+run_hyprland_init() {
+    if [[ -x "$DOTFILES_DIR/hyprland/.config/hypr/scripts/init.sh" ]]; then
+        echo "🔄 Running Hyprland init script..."
+        "$DOTFILES_DIR/hyprland/.config/hypr/scripts/init.sh"
+        echo "✅ Hyprland init script executed."
+    else
+        echo "⚠️ Hyprland init script not found or not executable at $DOTFILES_DIR/hyprland/.config/hypr/scripts/init.sh"
+    fi
+}
+
 reload_hyprland_if_running() {
     if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
         echo "🔄 Reloading Hyprland..."
@@ -177,6 +187,7 @@ unstow_dotfiles
 start_tmux_and_install_plugins
 install_node
 additional_setup
+run_hyprland_init
 reload_hyprland_if_running
 set_zsh_as_default
 

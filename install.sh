@@ -12,6 +12,7 @@ OFFICIAL_PACKAGES=(
     archlinux-xdg-menu
     base-devel
     bitwarden
+    cava
     discord
     dolphin
     fastfetch

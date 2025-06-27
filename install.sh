@@ -12,10 +12,13 @@ OFFICIAL_PACKAGES=(
     archlinux-xdg-menu
     base-devel
     bitwarden
+    btop
     cava
+    chromium # Used for web app view
     discord
     dolphin
     fastfetch
+    firefox # Preferred browser
     git
     helvum
     hyprcursor

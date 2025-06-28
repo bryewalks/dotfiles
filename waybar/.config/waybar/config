@@ -31,12 +31,14 @@
   "cpu": {
     "interval": 15,
     "format": " {}%",
-    "max-length": 10
+    "max-length": 10,
+    "on-click": "kitty btop"
   },
   "memory": {
     "interval": 30,
     "format": " {}%",
-    "max-length": 10
+    "max-length": 10,
+    "on-click": "kitty btop"
   },
   "custom/media": {
     "interval": 30,

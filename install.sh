@@ -16,6 +16,8 @@ OFFICIAL_PACKAGES=(
     cava
     chromium # Used for web app view
     discord
+    docker
+    docker-compose
     dolphin
     fastfetch
     firefox # Preferred browser
@@ -48,6 +50,7 @@ OFFICIAL_PACKAGES=(
 
 # Define AUR packages
 AUR_PACKAGES=(
+    lazydocker
     proton-mail-bin
     stremio
     waybar-cava

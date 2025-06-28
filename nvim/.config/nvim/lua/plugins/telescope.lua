@@ -18,7 +18,18 @@ return {
               ["<C-h>"] = actions.which_key,
             }
           }
-        }
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+            no_ignore = true,
+          },
+          live_grep = {
+            additional_args = function()
+              return { "--hidden", "--no-ignore" }
+            end,
+          },
+        },
       })
       vim.keymap.set("n", "<leader>f", "", { desc = "Find" })
       vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })

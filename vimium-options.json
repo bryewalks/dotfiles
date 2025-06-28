@@ -1,0 +1,5 @@
+{
+  "newTabUrl": "https://duckduckgo.com/",
+  "settingsVersion": "2.2.1",
+  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: #BD93F9;\nborder: none;\n}\n\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: #44475a;\nfont: \"CaskaydiaCove Nerd Font\";\nfont-weight: bold;\nfont-size: 12px;\nborder: none;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\ncolor: #8be9fd;\n}"
+}

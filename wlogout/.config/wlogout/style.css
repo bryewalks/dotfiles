@@ -20,7 +20,7 @@ button {
 	border: 10px solid #282a36;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding-bottom: 0px;
-  padding-left: 500px;
+  padding-left: 350px;
 }
 
 button:focus{
@@ -31,7 +31,6 @@ button:active,
 button:hover {
 	color: #44475a;
 	border: 10px solid #bd93f9;
-	/* border: 10px solid #50FA7B; */
 	background-color: rgb(40, 42, 54);
 }
 

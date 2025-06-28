@@ -54,6 +54,7 @@ AUR_PACKAGES=(
     proton-mail-bin
     stremio
     waybar-cava
+    wlogout-git
 )
 
 install_official_packages() {

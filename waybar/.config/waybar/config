@@ -146,7 +146,7 @@
   },
   "custom/power":{
     "format": "",
-    "on-click": "hyprctl dispatch exit",
+    "on-click": "wlogout",
     "on-click-middle": "shutdown -r now",
     "on-click-right": "shutdown -P now"
   },

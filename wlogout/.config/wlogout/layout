@@ -2,7 +2,9 @@
     "label": "lock",
     "action": "hyprlock",
     "text": "L",
-    "keybind": "l"
+    "keybind": "l",
+    "width": 1,
+    "height": 1
 }
 
 {
@@ -10,6 +12,8 @@
     "action": "hyprctl dispatch exit 0",
     "text": "E",
     "keybind": "e"
+    "width": 1,
+    "height": 1
 }
 
 {
@@ -17,6 +21,8 @@
     "action": "systemctl suspend && hyprlock",
     "text": "U",
     "keybind": "u"
+    "width": 1,
+    "height": 1
 }
 
 {
@@ -24,6 +30,8 @@
     "action": "systemctl poweroff",
     "text": "S",
     "keybind": "s"
+    "width": 1,
+    "height": 1
 }
 
 {
@@ -31,6 +39,8 @@
     "action": "systemctl hibernate && hyprlock",
     "text": "H",
     "keybind": "h"
+    "width": 1,
+    "height": 1
 }
 
 {
@@ -38,4 +48,6 @@
     "action": "systemctl reboot",
     "text": "R",
     "keybind": "r"
+    "width": 1,
+    "height": 1
 }

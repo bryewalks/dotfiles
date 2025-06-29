@@ -1,6 +1,6 @@
 * {
   border: none;
-  border-radius: 10;
+  border-radius: 6px;
   font-family: "CaskaydiaCove Nerd Font";
   font-size: 16px;
   min-height: 10px;
@@ -18,7 +18,7 @@ window#waybar.hidden {
   margin-top: 6px;
   padding-left: 10px;
   padding-right: 10px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: transparent;
   background: transparent;
@@ -29,7 +29,7 @@ window#waybar.hidden {
   margin-left: 12px;
   font-size: 4px;
   margin-bottom: 0px;
-  border-radius: 10px;
+  border-radius: 6px;
   color: #282a36;
   transition: none;
 }
@@ -74,7 +74,7 @@ window#waybar.hidden {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #bd93f9;
@@ -86,7 +86,7 @@ window#waybar.hidden {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #f1fa8c;
@@ -98,7 +98,7 @@ window#waybar.hidden {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #b5e8e0;
@@ -133,7 +133,7 @@ window#waybar.hidden {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #f8bd96;
@@ -145,7 +145,7 @@ window#waybar.hidden {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #50fa7b;
@@ -157,7 +157,7 @@ window#waybar.hidden {
   padding-left: 10px;
   margin-bottom: 0px;
   padding-right: 10px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #ff79c6;
@@ -169,7 +169,7 @@ window#waybar.hidden {
   padding-left: 10px;
   margin-bottom: 0px;
   padding-right: 10px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #8be9fd;
@@ -181,33 +181,31 @@ window#waybar.hidden {
   padding-left: 10px;
   margin-bottom: 0px;
   padding-right: 10px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #b5e8e0;
   background: #282a36;
 }
 
 #custom-launcher {
-  font-size: 20px;
   margin-top: 6px;
   margin-left: 8px;
   padding-left: 10px;
   padding-right: 16px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #8be9fd;
   background: #282a36;
 }
 
 #custom-power {
-  font-size: 20px;
   margin-top: 6px;
   margin-left: 8px;
   margin-right: 8px;
   padding-left: 10px;
   padding-right: 16px;
   margin-bottom: 0px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #f28fad;
@@ -219,7 +217,7 @@ window#waybar.hidden {
   padding-left: 10px;
   padding-right: 16px;
   margin-bottom: 0px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #bd93f9;
@@ -231,7 +229,7 @@ window#waybar.hidden {
   padding-left: 10px;
   padding-right: 16px;
   margin-bottom: 0px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #6272a4;
@@ -243,7 +241,7 @@ window#waybar.hidden {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #ffb86c;
@@ -255,7 +253,7 @@ window#waybar.hidden {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
+  border-radius: 6px;
   transition: none;
   color: #282a36;
   background: #f2cdcd;
@@ -272,6 +270,5 @@ window#waybar.hidden {
 #cava {
   color: #8be9fd;
   font-family: "bargraph";
-  font-size: 22px;
   margin-bottom: -10px;
 }

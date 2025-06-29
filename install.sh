@@ -185,7 +185,7 @@ additional_setup() {
     # For example, you might want to set up a wallpaper, configure Hyprland settings, etc.
     kbuildsycoca6  # Rebuild KDE service cache needed for dolphin to recognize new applications
 
-    # Set up Spotify theme
+    # Set up Spotify theme *this needs to happen after logging in to spotify
     # spicetify config current_theme Dracula
     # spicetify backup apply
     echo "✅ Additional setup tasks completed."

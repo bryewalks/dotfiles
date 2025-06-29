@@ -36,7 +36,12 @@ OFFICIAL_PACKAGES=(
     lsd
     neovim
     network-manager-applet
+    qt5-declarative
+    qt5-quickcontrols2
+    qt6-svg
+    qt6-declarative
     rofi
+    sddm
     spotify-launcher
     steam
     stow
@@ -179,6 +184,13 @@ reload_hyprland_if_running() {
     fi
 }
 
+setup_sddm() {
+    echo "🔄 Setting up SDDM..."
+    sddm/install.sh  
+    sudo systemctl enable sddm.service --now
+    echo "✅ SDDM setup complete. Please log out and log back in to apply changes."
+}
+
 additional_setup() {
     echo "🔄 Performing additional setup tasks..."
     # Add any additional setup tasks here
@@ -200,9 +212,10 @@ clone_dotfiles_if_missing
 unstow_dotfiles
 start_tmux_and_install_plugins
 install_node
-additional_setup
 run_hyprland_init
 reload_hyprland_if_running
 set_zsh_as_default
+setup_sddm
+additional_setup
 
 echo "🎉 System and dotfiles setup complete!"

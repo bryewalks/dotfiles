@@ -11,7 +11,7 @@
     "label": "logout",
     "action": "hyprctl dispatch exit 0",
     "text": "E",
-    "keybind": "e"
+    "keybind": "e",
     "width": 1,
     "height": 1
 }
@@ -19,8 +19,8 @@
 {
     "label": "suspend",
     "action": "systemctl suspend && hyprlock",
-    "text": "U",
-    "keybind": "u"
+    "text": "S",
+    "keybind": "s",
     "width": 1,
     "height": 1
 }
@@ -28,8 +28,8 @@
 {
     "label": "shutdown",
     "action": "systemctl poweroff",
-    "text": "S",
-    "keybind": "s"
+    "text": "P",
+    "keybind": "p",
     "width": 1,
     "height": 1
 }
@@ -38,7 +38,7 @@
     "label": "hibernate",
     "action": "systemctl hibernate && hyprlock",
     "text": "H",
-    "keybind": "h"
+    "keybind": "h",
     "width": 1,
     "height": 1
 }
@@ -47,7 +47,7 @@
     "label": "reboot",
     "action": "systemctl reboot",
     "text": "R",
-    "keybind": "r"
+    "keybind": "r",
     "width": 1,
     "height": 1
 }

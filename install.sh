@@ -2,9 +2,6 @@
 
 set -e
 
-# Customize this with your GitHub dotfiles repo
-GITHUB_USER="bryewalks"
-DOTFILES_REPO="dotfiles"
 DOTFILES_DIR="$HOME/dotfiles"
 
 # Define official repo packages
@@ -90,21 +87,6 @@ install_aur_packages() {
     echo "📦 Installing AUR packages via yay..."
     yay -Syu --noconfirm "${AUR_PACKAGES[@]}"
     echo "✅ AUR packages installed."
-}
-
-clone_dotfiles_if_missing() {
-    if [[ ! -d "$DOTFILES_DIR" ]]; then
-        echo "📁 Dotfiles directory not found. Cloning with submodules..."
-        git clone --recurse-submodules "https://github.com/$GITHUB_USER/$DOTFILES_REPO.git" "$DOTFILES_DIR"
-        echo "✅ Dotfiles cloned to $DOTFILES_DIR"
-    else
-        echo "✅ Dotfiles directory already exists at $DOTFILES_DIR"
-    fi
-
-    echo "🔄 Ensuring submodules are initialized..."
-    cd "$DOTFILES_DIR"
-    git submodule update --init --recursive
-    echo "✅ Submodules updated."
 }
 
 unstow_dotfiles() {
@@ -208,7 +190,6 @@ additional_setup() {
 install_official_packages
 install_yay_if_missing
 install_aur_packages
-clone_dotfiles_if_missing
 unstow_dotfiles
 start_tmux_and_install_plugins
 install_node

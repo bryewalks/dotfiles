@@ -186,8 +186,8 @@ additional_setup() {
     kbuildsycoca6  # Rebuild KDE service cache needed for dolphin to recognize new applications
 
     # Set up Spotify theme
-    spicetify config current_theme Dracula
-    spicetify backup apply
+    # spicetify config current_theme Dracula
+    # spicetify backup apply
     echo "✅ Additional setup tasks completed."
 }
 

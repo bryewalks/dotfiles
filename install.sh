@@ -53,7 +53,7 @@ OFFICIAL_PACKAGES=(
 AUR_PACKAGES=(
     lazydocker
     proton-mail-bin
-    spicetify
+    spicetify-cli
     stremio
     waybar-cava
     wlogout-git

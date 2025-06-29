@@ -37,6 +37,7 @@ OFFICIAL_PACKAGES=(
     neovim
     network-manager-applet
     rofi
+    spotify-launcher
     steam
     stow
     swaync
@@ -52,6 +53,7 @@ OFFICIAL_PACKAGES=(
 AUR_PACKAGES=(
     lazydocker
     proton-mail-bin
+    spicetify
     stremio
     waybar-cava
     wlogout-git
@@ -182,6 +184,10 @@ additional_setup() {
     # Add any additional setup tasks here
     # For example, you might want to set up a wallpaper, configure Hyprland settings, etc.
     kbuildsycoca6  # Rebuild KDE service cache needed for dolphin to recognize new applications
+
+    # Set up Spotify theme
+    spicetify config current_theme Dracula
+    spicetify backup apply
     echo "✅ Additional setup tasks completed."
 }
 

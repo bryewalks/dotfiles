@@ -14,7 +14,7 @@
 
 {
     "label": "suspend",
-    "action": "hyprlock & disown && systemctl suspend",
+    "action": "systemctl suspend && hyprlock",
     "text": "U",
     "keybind": "u"
 }
@@ -28,7 +28,7 @@
 
 {
     "label": "hibernate",
-    "action": "systemctl hibernate",
+    "action": "systemctl hibernate && hyprlock",
     "text": "H",
     "keybind": "h"
 }

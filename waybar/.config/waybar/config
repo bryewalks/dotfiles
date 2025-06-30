@@ -107,7 +107,9 @@
   },
   "custom/wallpaper":{
     "format":"",
-    "on-click": "bash ~/.config/system-scripts/wallpaper.sh"
+    "on-click": "waypaper",
+    "on-click-middle": "waypaper --restore",
+    "on-click-right": "waypaper --random"
   },
   "backlight": {
     "tooltip": false,

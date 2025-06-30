@@ -58,6 +58,7 @@ AUR_PACKAGES=(
     spicetify-cli
     stremio
     waybar-cava
+    waypaper
     wlogout-git
 )
 

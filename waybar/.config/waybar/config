@@ -103,7 +103,7 @@
     "exec": "checkupdates | wc -l",
     "exec-if": "[[ $(checkupdates | wc -l) != 0 ]]",
     "interval": 15,
-    "on-click": "kitty sudo pacman -Syu && notify-send ' 󰀦     System has been updated !'"
+    "on-click": "kitty sudo pacman -Syu && notify-send ' 󰀦 System has been updated! '"
   },
   "custom/wallpaper":{
     "format":"",

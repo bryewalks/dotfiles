@@ -25,6 +25,7 @@ OFFICIAL_PACKAGES=(
     hyprland
     hyprlock
     hyprpaper
+    hyprpicker
     hyprpolkitagent
     hyprshot
     kitty

@@ -108,7 +108,7 @@
   "custom/wallpaper":{
     "format":"",
     "on-click": "waypaper",
-    "on-click-middle": "waypaper --restore",
+    "on-click-middle": "$HOME/.config/system-scripts/hyprpicker-notify.sh",
     "on-click-right": "waypaper --random"
   },
   "backlight": {

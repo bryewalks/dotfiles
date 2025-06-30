@@ -15,10 +15,10 @@
     "cava",
     "custom/updates",
     "custom/wallpaper",
-    "backlight",
+    // "backlight", // TODO Fix backlight
     "pulseaudio",
-    "clock",
     "battery",
+    "clock",
     "custom/power"
   ],
 
@@ -129,11 +129,6 @@
       "default": ["", "", ""]
     }
   },
-  "clock": {
-    "format": "  {:%H:%M}",
-    "format-alt": "{:%a %b %d}",
-    "tooltip": false
-  },
   "battery": {
     "states": {
       "good": 95,
@@ -145,6 +140,11 @@
     "format-plugged": " {capacity}%",
     "format-alt": "{time} {icon}",
     "format-icons": ["", "", "", "", ""]
+  },
+  "clock": {
+    "format": "  {:%H:%M}",
+    "format-alt": "{:%a %b %d}",
+    "tooltip": false
   },
   "custom/power":{
     "format": "",

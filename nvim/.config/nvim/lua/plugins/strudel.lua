@@ -1,7 +1,7 @@
 return {
   "gruvw/strudel.nvim",
   cmd = "StrudelLaunch",
-  build = "npm install",
+  build = "npm install && git restore .",
   config = function()
     require("strudel").setup()
 

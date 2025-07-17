@@ -158,6 +158,18 @@ run_hyprland_init() {
     fi
 }
 
+install_hyprland_plugins() {
+    echo "🔄 Installing Hyprland plugins..."
+    hyprpm add https://github.com/hyprwm/hyprland-plugins || true
+    hyprpm add https://github.com/daxisunder/hyprfocus || true
+    hyprpm add https://github.com/virtcode/hypr-dynamic-cursors || true
+
+    hyprpm enable hyprfocus
+    hyprpm enable dynamic-cursors
+    hyprpm enable hyprwinwrap
+    echo "✅ Hyprland plugins enabled."
+}
+
 reload_hyprland_if_running() {
     if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
         echo "🔄 Reloading Hyprland..."
@@ -196,6 +208,7 @@ unstow_dotfiles
 start_tmux_and_install_plugins
 install_node
 run_hyprland_init
+install_hyprland_plugins
 reload_hyprland_if_running
 set_zsh_as_default
 setup_sddm

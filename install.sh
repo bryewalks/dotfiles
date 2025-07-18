@@ -58,6 +58,7 @@ AUR_PACKAGES=(
     proton-mail-bin
     spicetify-cli
     stremio
+    vesktop # Better screensharing than discord
     waybar-cava
     waypaper
     wlogout-git

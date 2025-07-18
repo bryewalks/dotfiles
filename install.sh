@@ -55,6 +55,7 @@ OFFICIAL_PACKAGES=(
 # Define AUR packages
 AUR_PACKAGES=(
     lazydocker
+    opencode-bin
     proton-mail-bin
     spicetify-cli
     stremio

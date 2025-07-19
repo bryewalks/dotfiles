@@ -16,8 +16,8 @@ return {
             n = {
               ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
               ["<C-h>"] = actions.which_key,
-            }
-          }
+            },
+          },
         },
         pickers = {
           find_files = {

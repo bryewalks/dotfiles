@@ -17,6 +17,7 @@ return {
     use_popups_for_input = false,
     window = {
       mappings = {
+        ["P"] = "image_preview",
         ["Y"] = {
           function(state)
             local node = state.tree:get_node()
@@ -34,6 +35,24 @@ return {
         },
       },
     },
+    commands = {
+      -- figure out why this doesn't work with tmux
+      image_preview = function(state)
+        local node = state.tree:get_node()
+        if node.type == "file" then
+          vim.notify("Previewing image: " .. node.path)
+          vim.fn.jobstart({
+            "kitty",
+            "kitten",
+            "icat",
+            "--hold",
+            "" .. node.path,
+          }, {
+            detach = false
+          })
+        end
+      end,
+    }
 	},
 	config = function(_, opts)
     require("neo-tree").setup(opts)

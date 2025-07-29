@@ -38,6 +38,7 @@ OFFICIAL_PACKAGES=(
     qt5-quickcontrols2
     qt6-svg
     qt6-declarative
+    ripgrep
     rofi
     sddm
     spotify-launcher

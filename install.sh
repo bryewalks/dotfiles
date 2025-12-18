@@ -12,6 +12,7 @@ OFFICIAL_PACKAGES=(
     btop
     cava
     chromium # Used for web app view
+    cmus
     discord
     docker
     docker-compose

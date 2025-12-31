@@ -56,6 +56,7 @@ OFFICIAL_PACKAGES=(
 
 # Define AUR packages
 AUR_PACKAGES=(
+    icu76 # Temp fix for stremio https://github.com/Stremio/stremio-shell/issues/458
     lazydocker
     opencode-bin
     proton-mail-bin

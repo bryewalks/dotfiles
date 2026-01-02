@@ -166,10 +166,12 @@ run_hyprland_init() {
 install_hyprland_plugins() {
     echo "🔄 Installing Hyprland plugins..."
     hyprpm add https://github.com/hyprwm/hyprland-plugins || true
-    hyprpm add https://github.com/daxisunder/hyprfocus || true
+    hyprpm add https://github.com/bryewalks/hyprfocus || true
+    hyprpm add https://github.com/bryewalks/hyprland-easymotion || true
     hyprpm add https://github.com/virtcode/hypr-dynamic-cursors || true
 
     hyprpm enable hyprfocus
+    hyprpm enable hyprEasymotion
     hyprpm enable dynamic-cursors
     hyprpm enable hyprwinwrap
     echo "✅ Hyprland plugins enabled."

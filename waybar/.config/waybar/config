@@ -96,7 +96,8 @@
     "input_delay": 2,
     "sleep_timer": 2,
     "hide_on_silence": true,
-    "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+    "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    "on-click-middle": "$HOME/.config/hypr/scripts/winwrap.sh"
   },
   "custom/updates":{
     "format": "{} Update(s)",

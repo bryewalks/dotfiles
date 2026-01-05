@@ -173,7 +173,6 @@ install_hyprland_plugins() {
     hyprpm enable hyprfocus
     hyprpm enable hyprEasymotion
     hyprpm enable dynamic-cursors
-    hyprpm enable hyprwinwrap
     echo "✅ Hyprland plugins enabled."
 }
 

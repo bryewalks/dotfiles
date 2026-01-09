@@ -141,7 +141,7 @@ install_yay_if_missing() {
 
 install_aur_packages() {
     log_step "Installing AUR packages"
-    yay -Syu --noconfirm --needed "${AUR_PACKAGES[@]}"
+    yay -S --noconfirm --needed --quiet "${AUR_PACKAGES[@]}"
     log_ok "AUR packages installed"
 }
 

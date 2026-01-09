@@ -59,11 +59,8 @@ OFFICIAL_PACKAGES=(
 AUR_PACKAGES=(
     icu76
     lazydocker
-    opencode-bin
     proton-mail-bin
-    spicetify-cli
     stremio
-    vesktop
     waybar-cava
     waypaper
     wlogout-git

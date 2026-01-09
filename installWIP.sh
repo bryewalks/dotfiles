@@ -112,10 +112,6 @@ progress() {
 # Helpers
 ############################
 
-run_quiet() {
-    "$@" > /dev/null 2>&1
-}
-
 require_sudo() {
     sudo -v
 }
@@ -126,7 +122,7 @@ require_sudo() {
 
 install_official_packages() {
     log_step "Installing official packages"
-    run_quiet sudo pacman -Syu --noconfirm --needed "${OFFICIAL_PACKAGES[@]}"
+    sudo pacman -Syu --noconfirm --needed "${OFFICIAL_PACKAGES[@]}"
     log_ok "Official packages installed"
 }
 
@@ -135,7 +131,7 @@ install_yay_if_missing() {
         log_step "Installing yay (AUR helper)"
         tmp=$(mktemp -d)
         git clone https://aur.archlinux.org/yay.git "$tmp" > /dev/null
-        (cd "$tmp" && run_quiet makepkg -si --noconfirm)
+        (cd "$tmp" && makepkg -si --noconfirm)
         rm -rf "$tmp"
         log_ok "yay installed"
     else
@@ -145,7 +141,7 @@ install_yay_if_missing() {
 
 install_aur_packages() {
     log_step "Installing AUR packages"
-    run_quiet yay -Syu --noconfirm --needed "${AUR_PACKAGES[@]}"
+    yay -Syu --noconfirm --needed "${AUR_PACKAGES[@]}"
     log_ok "AUR packages installed"
 }
 

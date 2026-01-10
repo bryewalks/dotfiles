@@ -90,7 +90,7 @@ section() {
 # Progress Bar
 ############################
 
-TOTAL_STEPS=12
+TOTAL_STEPS=13
 CURRENT_STEP=0
 BAR_WIDTH=20
 
@@ -256,10 +256,15 @@ install_hyprland_plugins() {
     hyprpm add https://github.com/bryewalks/hyprland-easymotion || true
     hyprpm add https://github.com/virtcode/hypr-dynamic-cursors || true
 
-    hyprpm enable hyprfocus
-    hyprpm enable hyprEasymotion
-    hyprpm enable dynamic-cursors
-    log_ok "Hyprland plugins enabled"
+    if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
+        log_step "Enabling Hyprland plugins"
+        hyprpm enable hyprfocus
+        hyprpm enable hyprEasymotion
+        hyprpm enable dynamic-cursors
+        log_ok "Hyprland plugins enabled"
+    else
+        log_warn "Hyprland plugins cannot be enabled (Hyprland not running)"
+    fi
 }
 
 reload_hyprland() {
@@ -267,8 +272,6 @@ reload_hyprland() {
         log_step "Reloading Hyprland"
         hyprctl reload
         log_ok "Hyprland reloaded"
-    else
-        log_warn "Hyprland not running"
     fi
 }
 

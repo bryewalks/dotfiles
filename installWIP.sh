@@ -174,7 +174,7 @@ unstow_dotfiles() {
     done
 
     for dir in */; do
-        stow_package "${dir%/}"
+        unstow_package "${dir%/}"
     done
 }
 
@@ -301,6 +301,7 @@ section "Package Installation"
 install_official_packages; progress "Official packages"
 install_yay_if_missing;     progress "yay setup"
 install_aur_packages;       progress "AUR packages"
+ensure_submodules;        progress "Git submodules"
 
 section "Dotfiles & Shell"
 unstow_dotfiles;            progress "Dotfiles"

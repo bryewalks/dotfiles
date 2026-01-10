@@ -142,14 +142,6 @@ install_aur_packages() {
     log_ok "AUR packages installed"
 }
 
-ensure_submodules() {
-    if [[ -f .gitmodules ]]; then
-        log_step "Checking git submodules"
-        git submodule update --init --recursive
-        log_ok "Submodules ready"
-    fi
-}
-
 unstow_package() {
     local pkg="$1"
 
@@ -304,7 +296,6 @@ section "Package Installation"
 install_official_packages; progress "Official packages"
 install_yay_if_missing;     progress "yay setup"
 install_aur_packages;       progress "AUR packages"
-ensure_submodules;        progress "Git submodules"
 
 section "Dotfiles & Shell"
 unstow_dotfiles;            progress "Dotfiles"

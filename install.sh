@@ -1,24 +1,26 @@
 #!/bin/bash
-
 set -e
+
+############################
+# Configuration
+############################
 
 DOTFILES_DIR="$HOME/dotfiles"
 
-# Define official repo packages
 OFFICIAL_PACKAGES=(
     archlinux-xdg-menu
     base-devel
     bitwarden
     btop
     cava
-    chromium # Used for web app view
+    chromium
     cmus
     discord
     docker
     docker-compose
     dolphin
     fastfetch
-    firefox # Preferred browser
+    firefox
     git
     helvum
     hyprcursor
@@ -55,9 +57,8 @@ OFFICIAL_PACKAGES=(
     zsh
 )
 
-# Define AUR packages
 AUR_PACKAGES=(
-    icu76 # Temp fix for stremio https://github.com/Stremio/stremio-shell/issues/458
+    icu76
     proton-mail
     stremio
     waybar-cava
@@ -65,152 +66,250 @@ AUR_PACKAGES=(
     wlogout-git
 )
 
+############################
+# Styling / Logging
+############################
+
+RESET="\e[0m"
+BOLD="\e[1m"
+BLUE="\e[34m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+RED="\e[31m"
+
+log_step() { echo -e "${BLUE}${BOLD}▶ $1${RESET}"; }
+log_ok()   { echo -e "${GREEN}✔ $1${RESET}"; }
+log_warn() { echo -e "${YELLOW}⚠ $1${RESET}"; }
+log_err()  { echo -e "${RED}✖ $1${RESET}"; }
+
+section() {
+    echo -e "\n${BOLD}=== $1 ===${RESET}"
+}
+
+############################
+# Progress Bar
+############################
+
+TOTAL_STEPS=12
+CURRENT_STEP=0
+BAR_WIDTH=20
+
+progress() {
+    CURRENT_STEP=$((CURRENT_STEP + 1))
+    local filled=$((CURRENT_STEP * BAR_WIDTH / TOTAL_STEPS))
+    local empty=$((BAR_WIDTH - filled))
+
+    printf "\n["
+    printf "■%.0s" $(seq 1 "$filled")
+    printf "□%.0s" $(seq 1 "$empty")
+    printf "] %d/%d %s\n\n" "$CURRENT_STEP" "$TOTAL_STEPS" "$1"
+}
+
+############################
+# Helpers
+############################
+
+require_sudo() {
+    sudo -v
+}
+
+############################
+# Steps
+############################
+
 install_official_packages() {
-    echo "📦 Installing official packages via pacman..."
-    sudo pacman -Syu --noconfirm "${OFFICIAL_PACKAGES[@]}"
-    echo "✅ Official packages installed."
+    log_step "Installing official packages"
+    sudo pacman -Syu --noconfirm --needed "${OFFICIAL_PACKAGES[@]}"
+    log_ok "Official packages installed"
 }
 
 install_yay_if_missing() {
     if ! command -v yay &> /dev/null; then
-        echo "🔧 yay not found — installing from AUR..."
-        TEMP_DIR=$(mktemp -d)
-        cd "$TEMP_DIR"
-        git clone https://aur.archlinux.org/yay.git
-        cd yay
-        makepkg -si --noconfirm
-        cd ~
-        rm -rf "$TEMP_DIR"
-        echo "✅ yay installed."
+        log_step "Installing yay (AUR helper)"
+        tmp=$(mktemp -d)
+        git clone https://aur.archlinux.org/yay.git "$tmp" > /dev/null
+        (cd "$tmp" && makepkg -si --noconfirm)
+        rm -rf "$tmp"
+        log_ok "yay installed"
     else
-        echo "✅ yay is already installed."
+        log_ok "yay already installed"
     fi
 }
 
 install_aur_packages() {
-    echo "📦 Installing AUR packages via yay..."
-    yay -Syu --noconfirm "${AUR_PACKAGES[@]}"
-    echo "✅ AUR packages installed."
+    log_step "Installing AUR packages"
+    yay -S --noconfirm --needed --quiet "${AUR_PACKAGES[@]}"
+    log_ok "AUR packages installed"
 }
 
-unstow_dotfiles() {
-    if [[ -d "$DOTFILES_DIR" ]]; then
-        echo "🗂️ Unstowing dotfiles from $DOTFILES_DIR..."
-        cd "$DOTFILES_DIR"
+unstow_package() {
+    local pkg="$1"
 
-        # Remove existing stows to prevent duplication
-        for dir in */; do
-            stow -D "${dir%/}" 2>/dev/null || true
-        done
-
-        stow */
-
-        echo "✅ Dotfiles unstowed successfully."
+    if stow "$pkg"; then
+        log_ok "$pkg Configured"
     else
-        echo "⚠️ Dotfiles directory not found — skipping stow step."
+        log_warn "Conflicts while configuring $pkg — skipping"
     fi
 }
 
-set_zsh_as_default() {
-    echo "🔄 Setting Zsh as the default shell..."
-    chsh -s "$(which zsh)"
-    echo "✅ Zsh set as the default shell. Please log out and log back in for changes to take effect."
+unstow_dotfiles() {
+    if [[ ! -d "$DOTFILES_DIR" ]]; then
+        log_warn "Dotfiles directory not found, skipping"
+        return 0
+    fi
+
+    log_step "Configuring dotfiles"
+    cd "$DOTFILES_DIR"
+
+    for dir in */; do
+        stow -D "${dir%/}" 2>/dev/null || true
+    done
+
+    for dir in */; do
+        unstow_package "${dir%/}"
+    done
 }
 
-start_tmux_and_install_plugins() {
-    echo "🔄 Starting tmux..."
-    tmux new-session -d -s mysession  # Start a new tmux session in detached mode
+tmux_plugins() {
+    log_step "Installing tmux plugins"
 
-    # Install tmux plugins
-    echo "🔄 Installing tmux plugins..."
-    tmux source-file ~/.tmux.conf  # Reload tmux configuration to load plugins
-    tmux run-shell '~/.tmux/plugins/tpm/bin/install_plugins'  # Install plugins
-    echo "✅ tmux plugins installed."
+    # 1. Check tmux is installed
+    if ! command -v tmux &>/dev/null; then
+        log_warn "tmux not installed, skipping tmux plugin setup"
+        return 0
+    fi
 
-    # Stop the tmux session
-    echo "🔄 Stopping tmux session..."
-    tmux kill-session -t mysession  # Kill the tmux session
-    echo "✅ tmux session stopped."
+    # 2. Check TPM exists
+    local tpm_dir="$HOME/.tmux/plugins/tpm"
+    if [[ ! -x "$tpm_dir/bin/install_plugins" ]]; then
+        log_warn "TPM not found at $tpm_dir"
+        log_warn "Did you forget to pull git submodules?"
+        log_warn "Skipping tmux plugin installation"
+        return 0
+    fi
+
+    # 3. Clean up old session if it exists
+    if tmux has-session -t setup 2>/dev/null; then
+        log_warn "Old tmux session 'setup' exists, killing it"
+        tmux kill-session -t setup || {
+            log_warn "Failed to kill existing tmux session"
+            return 0
+        }
+    fi
+
+    # 4. Create temporary session
+    tmux new-session -d -s setup || {
+        log_warn "Failed to create tmux session"
+        return 0
+    }
+
+    # 5. Load config (non-fatal)
+    tmux source-file ~/.tmux.conf 2>/dev/null || \
+        log_warn "Failed to source ~/.tmux.conf"
+
+    # 6. Install plugins
+    if ! tmux run-shell "$tpm_dir/bin/install_plugins"; then
+        log_warn "TPM plugin installation failed"
+    else
+        log_ok "tmux plugins installed"
+    fi
+
+    # 7. Cleanup
+    tmux kill-session -t setup 2>/dev/null || true
 }
 
 install_node() {
-    # Check if nvm is installed
-    if [ -d "$HOME/.nvm" ]; then
-        echo "🔄 Installing Node.js..."
-        
-        # Load nvm
+    if [[ -d "$HOME/.nvm" ]]; then
+        log_step "Installing Node.js"
         export NVM_DIR="$HOME/.nvm"
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-        # Install the latest version of Node.js
-        nvm install node
-        echo "✅ Node.js installed."
+        source "$NVM_DIR/nvm.sh"
+        nvm install node > /dev/null
+        log_ok "Node.js installed"
     else
-        echo "⚠️ nvm is not installed. Skipping Node.js installation."
+        log_warn "nvm not found, skipping Node.js"
     fi
 }
 
 run_hyprland_init() {
-    if [[ -x "$DOTFILES_DIR/hyprland/.config/hypr/scripts/init.sh" ]]; then
-        echo "🔄 Running Hyprland init script..."
-        "$DOTFILES_DIR/hyprland/.config/hypr/scripts/init.sh"
-        echo "✅ Hyprland init script executed."
+    local script="$DOTFILES_DIR/hyprland/.config/hypr/scripts/init.sh"
+    if [[ -x "$script" ]]; then
+        log_step "Running Hyprland init script"
+        "$script"
+        log_ok "Hyprland init complete"
     else
-        echo "⚠️ Hyprland init script not found or not executable at $DOTFILES_DIR/hyprland/.config/hypr/scripts/init.sh"
+        log_warn "Hyprland init script not found"
     fi
 }
 
 install_hyprland_plugins() {
-    echo "🔄 Installing Hyprland plugins..."
+    log_step "Installing Hyprland plugins"
     hyprpm add https://github.com/hyprwm/hyprland-plugins || true
     hyprpm add https://github.com/bryewalks/hyprfocus || true
     hyprpm add https://github.com/bryewalks/hyprland-easymotion || true
     hyprpm add https://github.com/virtcode/hypr-dynamic-cursors || true
 
-    hyprpm enable hyprfocus
-    hyprpm enable hyprEasymotion
-    hyprpm enable dynamic-cursors
-    echo "✅ Hyprland plugins enabled."
-}
-
-reload_hyprland_if_running() {
     if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
-        echo "🔄 Reloading Hyprland..."
-        hyprctl reload
-        echo "✅ Hyprland reloaded."
+        log_step "Enabling Hyprland plugins"
+        hyprpm enable hyprfocus
+        hyprpm enable hyprEasymotion
+        hyprpm enable dynamic-cursors
+        log_ok "Hyprland plugins enabled"
     else
-        echo "⚠️ Hyprland is not running — skipping reload."
+        log_warn "Hyprland plugins cannot be enabled (Hyprland not running)"
     fi
 }
 
+reload_hyprland() {
+    if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
+        log_step "Reloading Hyprland"
+        hyprctl reload
+        log_ok "Hyprland reloaded"
+    fi
+}
+
+set_zsh() {
+    log_step "Setting Zsh as default shell"
+    chsh -s "$(which zsh)"
+    log_ok "Zsh set as default shell"
+}
+
 setup_sddm() {
-    echo "🔄 Setting up SDDM..."
-    sddm/install.sh  
+    log_step "Setting up SDDM"
+    sddm/install.sh
     sudo systemctl enable sddm.service --now
-    echo "✅ SDDM setup complete. Please log out and log back in to apply changes."
+    log_ok "SDDM enabled"
 }
 
 additional_setup() {
-    echo "🔄 Performing additional setup tasks..."
-    # Add any additional setup tasks here
-    # For example, you might want to set up a wallpaper, configure Hyprland settings, etc.
-    kbuildsycoca6  # Rebuild KDE service cache needed for dolphin to recognize new applications
-    echo "✅ Additional setup tasks completed."
+    log_step "Final system tweaks"
+    kbuildsycoca6
+    log_ok "Additional setup complete"
 }
 
+############################
+# Execution
+############################
 
-# Main logic
-install_official_packages
-install_yay_if_missing
-install_aur_packages
-unstow_dotfiles
-start_tmux_and_install_plugins
-install_node
-run_hyprland_init
-install_hyprland_plugins
-reload_hyprland_if_running
-set_zsh_as_default
-setup_sddm
-additional_setup
+require_sudo
 
-echo "🎉 System and dotfiles setup complete!"
+section "Package Installation"
+install_official_packages; progress "Official packages"
+install_yay_if_missing;     progress "yay setup"
+install_aur_packages;       progress "AUR packages"
+
+section "Dotfiles & Shell"
+unstow_dotfiles;            progress "Dotfiles"
+tmux_plugins;               progress "tmux plugins"
+install_node;               progress "Node.js"
+set_zsh;                    progress "Zsh default"
+
+section "Hyprland"
+run_hyprland_init;          progress "Hyprland init"
+install_hyprland_plugins;   progress "Hyprland plugins"
+reload_hyprland;            progress "Hyprland reload"
+
+section "System"
+setup_sddm;                 progress "SDDM"
+additional_setup;           progress "Additional tweaks"
+
+echo -e "\n${GREEN}${BOLD}🎉 System setup complete!${RESET}"

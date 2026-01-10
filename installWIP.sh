@@ -142,27 +142,88 @@ install_aur_packages() {
     log_ok "AUR packages installed"
 }
 
-unstow_dotfiles() {
-    if [[ -d "$DOTFILES_DIR" ]]; then
-        log_step "Stowing dotfiles"
-        cd "$DOTFILES_DIR"
-        for dir in */; do
-            stow -D "${dir%/}" 2>/dev/null || true
-        done
-        stow */
-        log_ok "Dotfiles stowed"
-    else
-        log_warn "Dotfiles directory not found, skipping"
+ensure_submodules() {
+    if [[ -f .gitmodules ]]; then
+        log_step "Checking git submodules"
+        git submodule update --init --recursive
+        log_ok "Submodules ready"
     fi
+}
+
+unstow_package() {
+    local pkg="$1"
+
+    if stow "$pkg"; then
+        log_ok "$pkg Configured"
+    else
+        log_warn "Conflicts while configuring $pkg — skipping"
+    fi
+}
+
+unstow_dotfiles() {
+    if [[ ! -d "$DOTFILES_DIR" ]]; then
+        log_warn "Dotfiles directory not found, skipping"
+        return 0
+    fi
+
+    log_step "Configuring dotfiles"
+    cd "$DOTFILES_DIR"
+
+    for dir in */; do
+        stow -D "${dir%/}" 2>/dev/null || true
+    done
+
+    for dir in */; do
+        stow_package "${dir%/}"
+    done
 }
 
 tmux_plugins() {
     log_step "Installing tmux plugins"
-    tmux new-session -d -s setup >/dev/null
-    tmux source-file ~/.tmux.conf
-    tmux run-shell '~/.tmux/plugins/tpm/bin/install_plugins'
-    tmux kill-session -t setup
-    log_ok "tmux plugins installed"
+
+    # 1. Check tmux is installed
+    if ! command -v tmux &>/dev/null; then
+        log_warn "tmux not installed, skipping tmux plugin setup"
+        return 0
+    fi
+
+    # 2. Check TPM exists
+    local tpm_dir="$HOME/.tmux/plugins/tpm"
+    if [[ ! -x "$tpm_dir/bin/install_plugins" ]]; then
+        log_warn "TPM not found at $tpm_dir"
+        log_warn "Did you forget to pull git submodules?"
+        log_warn "Skipping tmux plugin installation"
+        return 0
+    fi
+
+    # 3. Clean up old session if it exists
+    if tmux has-session -t setup 2>/dev/null; then
+        log_warn "Old tmux session 'setup' exists, killing it"
+        tmux kill-session -t setup || {
+            log_warn "Failed to kill existing tmux session"
+            return 0
+        }
+    fi
+
+    # 4. Create temporary session
+    tmux new-session -d -s setup || {
+        log_warn "Failed to create tmux session"
+        return 0
+    }
+
+    # 5. Load config (non-fatal)
+    tmux source-file ~/.tmux.conf 2>/dev/null || \
+        log_warn "Failed to source ~/.tmux.conf"
+
+    # 6. Install plugins
+    if ! tmux run-shell "$tpm_dir/bin/install_plugins"; then
+        log_warn "TPM plugin installation failed"
+    else
+        log_ok "tmux plugins installed"
+    fi
+
+    # 7. Cleanup
+    tmux kill-session -t setup 2>/dev/null || true
 }
 
 install_node() {

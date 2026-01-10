@@ -33,6 +33,7 @@ OFFICIAL_PACKAGES=(
     hyprshot
     kitty
     kvantum
+    lazydocker
     loupe
     lsd
     neovim
@@ -58,8 +59,7 @@ OFFICIAL_PACKAGES=(
 
 AUR_PACKAGES=(
     icu76
-    lazydocker
-    proton-mail-bin
+    proton-mail
     stremio
     waybar-cava
     waypaper

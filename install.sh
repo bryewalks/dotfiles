@@ -21,6 +21,7 @@ OFFICIAL_PACKAGES=(
     dolphin
     fastfetch
     firefox
+    flatpak
     git
     helvum
     hyprcursor
@@ -38,6 +39,7 @@ OFFICIAL_PACKAGES=(
     lsd
     neovim
     network-manager-applet
+    openai-codex
     qt5-declarative
     qt5-quickcontrols2
     qt6-svg
@@ -60,10 +62,13 @@ OFFICIAL_PACKAGES=(
 AUR_PACKAGES=(
     icu76
     proton-mail
-    stremio
     waybar-cava
     waypaper
     wlogout-git
+)
+
+FLATPAKS=(
+    com.stremio.Stremio
 )
 
 ############################
@@ -90,7 +95,7 @@ section() {
 # Progress Bar
 ############################
 
-TOTAL_STEPS=12
+TOTAL_STEPS=14
 CURRENT_STEP=0
 BAR_WIDTH=20
 
@@ -140,6 +145,30 @@ install_aur_packages() {
     log_step "Installing AUR packages"
     yay -S --noconfirm --needed --quiet "${AUR_PACKAGES[@]}"
     log_ok "AUR packages installed"
+}
+
+setup_flatpak() {
+    # Install flatpak if not installed
+    if ! command -v flatpak &>/dev/null; then
+        log_step "Installing flatpak"
+        sudo pacman -S --noconfirm flatpak
+    fi
+
+    log_ok "Flatpak installed"
+
+    # Add Flathub if not already added
+    if ! flatpak remote-list | grep -q flathub; then
+        log_step "Setting up flathub"
+        sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    fi
+
+    log_ok "Flathub configured"
+}
+
+install_flatpaks() {
+    log_step "Installing flatpaks"
+    sudo flatpak install -y flathub "${FLATPAKS[@]}"
+    log_ok "Flatpaks installed"
 }
 
 unstow_package() {
@@ -243,16 +272,26 @@ run_hyprland_init() {
 
 install_hyprland_plugins() {
     log_step "Installing Hyprland plugins"
-    hyprpm add https://github.com/hyprwm/hyprland-plugins || true
-    hyprpm add https://github.com/bryewalks/hyprfocus || true
-    hyprpm add https://github.com/bryewalks/hyprland-easymotion || true
-    hyprpm add https://github.com/virtcode/hypr-dynamic-cursors || true
+    HYPRLAND_REPOS=(
+        https://github.com/hyprwm/hyprland-plugins
+        https://github.com/bryewalks/hyprfocus
+        https://github.com/bryewalks/hyprland-easymotion
+        https://github.com/virtcode/hypr-dynamic-cursors
+    )
+    HYPRLAND_PLUGINS=(
+        hyprfocus
+        hyprEasymotion
+        dynamic-cursors
+    )
+
+    for repo in "${HYPRLAND_REPOS[@]}"; do
+        hyprpm add "$repo" || true
+    done
 
     if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
         log_step "Enabling Hyprland plugins"
-        hyprpm enable hyprfocus
-        hyprpm enable hyprEasymotion
-        hyprpm enable dynamic-cursors
+        hyprpm enable "$HYPRLAND_PLUGINS"
+
         log_ok "Hyprland plugins enabled"
     else
         log_warn "Hyprland plugins cannot be enabled (Hyprland not running)"
@@ -296,6 +335,8 @@ section "Package Installation"
 install_official_packages; progress "Official packages"
 install_yay_if_missing;     progress "yay setup"
 install_aur_packages;       progress "AUR packages"
+setup_flatpak;              progress "Flatpak setup"
+install_flatpaks;           progress "Flatpaks"
 
 section "Dotfiles & Shell"
 unstow_dotfiles;            progress "Dotfiles"

@@ -25,6 +25,11 @@ A script is provided to automate the inital setup process for Hyprland and dotfi
 ./install.sh
 ```
 
+Ask before proceeding with each step.
+```sh
+./install.sh --confirm
+```
+
 This script will automatically install necessary plugins for hyprland and unstow all available configurations.
 
 ## Notes

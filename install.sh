@@ -6,6 +6,24 @@ set -e
 ############################
 
 DOTFILES_DIR="$HOME/dotfiles"
+CONFIRM_STEPS=0
+
+for arg in "$@"; do
+    case "$arg" in
+        --confirm|-i)
+            CONFIRM_STEPS=1
+            ;;
+        --help|-h)
+            echo "Usage: $0 [--confirm|-i]"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $arg"
+            echo "Usage: $0 [--confirm|-i]"
+            exit 1
+            ;;
+    esac
+done
 
 OFFICIAL_PACKAGES=(
     archlinux-xdg-menu
@@ -105,8 +123,8 @@ progress() {
     local empty=$((BAR_WIDTH - filled))
 
     printf "\n["
-    printf "■%.0s" $(seq 1 "$filled")
-    printf "□%.0s" $(seq 1 "$empty")
+    (( filled > 0 )) && printf "■%.0s" $(seq 1 "$filled")
+    (( empty > 0 )) && printf "□%.0s" $(seq 1 "$empty")
     printf "] %d/%d %s\n\n" "$CURRENT_STEP" "$TOTAL_STEPS" "$1"
 }
 
@@ -116,6 +134,36 @@ progress() {
 
 require_sudo() {
     sudo -v
+}
+
+confirm_step() {
+    local label="$1"
+
+    if [[ "$CONFIRM_STEPS" -ne 1 ]] || [[ ! -t 0 ]]; then
+        return 0
+    fi
+
+    while true; do
+        read -r -p "Run step: ${label}? [Y/n] " reply
+        case "${reply,,}" in
+            ""|y|yes) return 0 ;;
+            n|no) return 1 ;;
+            *) echo "Please enter y or n." ;;
+        esac
+    done
+}
+
+run_step() {
+    local label="$1"
+    local fn="$2"
+
+    if confirm_step "$label"; then
+        "$fn"
+    else
+        log_warn "Skipping ${label}"
+    fi
+
+    progress "$label"
 }
 
 ############################
@@ -332,25 +380,25 @@ additional_setup() {
 require_sudo
 
 section "Package Installation"
-install_official_packages; progress "Official packages"
-install_yay_if_missing;     progress "yay setup"
-install_aur_packages;       progress "AUR packages"
-setup_flatpak;              progress "Flatpak setup"
-install_flatpaks;           progress "Flatpaks"
+run_step "Official packages" install_official_packages
+run_step "yay setup" install_yay_if_missing
+run_step "AUR packages" install_aur_packages
+run_step "Flatpak setup" setup_flatpak
+run_step "Flatpaks" install_flatpaks
 
 section "Dotfiles & Shell"
-unstow_dotfiles;            progress "Dotfiles"
-tmux_plugins;               progress "tmux plugins"
-install_node;               progress "Node.js"
-set_zsh;                    progress "Zsh default"
+run_step "Dotfiles" unstow_dotfiles
+run_step "tmux plugins" tmux_plugins
+run_step "Node.js" install_node
+run_step "Zsh default" set_zsh
 
 section "Hyprland"
-run_hyprland_init;          progress "Hyprland init"
-install_hyprland_plugins;   progress "Hyprland plugins"
-reload_hyprland;            progress "Hyprland reload"
+run_step "Hyprland init" run_hyprland_init
+run_step "Hyprland plugins" install_hyprland_plugins
+run_step "Hyprland reload" reload_hyprland
 
 section "System"
-setup_sddm;                 progress "SDDM"
-additional_setup;           progress "Additional tweaks"
+run_step "SDDM" setup_sddm
+run_step "Additional tweaks" additional_setup
 
 echo -e "\n${GREEN}${BOLD}🎉 System setup complete!${RESET}"

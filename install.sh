@@ -74,6 +74,7 @@ OFFICIAL_PACKAGES=(
     ttf-cascadia-mono-nerd
     vlc
     xdg-desktop-portal-hyprland
+    yazi
     zsh
 )
 

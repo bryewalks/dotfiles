@@ -117,6 +117,10 @@ source ~/.nvm/nvm.sh
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/home/brye/.lmstudio/bin"
 
+# Editor
+export EDITOR="nvim"
+export VISUAL="nvim"
+
 # tmuxifier
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"

@@ -19,6 +19,7 @@
     "pulseaudio",
     "battery",
     "clock",
+    "custom/weather",
     "custom/power"
   ],
 
@@ -122,8 +123,8 @@
   "pulseaudio": {
     "tooltip": false,
     "scroll-step": 5,
-    "format": "{icon}  {volume}%",
-    "format-muted": " {volume}%",
+    "format": "{icon} \u2009{volume}%",
+    "format-muted": " \u2009{volume}%",
     "on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-middle": "systemctl --user restart pipewire",
     "format-icons": {
@@ -136,14 +137,14 @@
       "warning": 30,
       "critical": 20
     },
-    "format": "{icon}  {capacity}%",
+    "format": "{icon} {capacity}%",
     "format-charging": " {capacity}%",
     "format-plugged": " {capacity}%",
     "format-alt": "{time} {icon}",
     "format-icons": ["", "", "", "", ""]
   },
   "clock": {
-    "format": "  {:%H:%M}",
+    "format": " {:%H:%M}",
     "format-alt": "{:%a %b %d}",
     "tooltip": true,
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
@@ -162,6 +163,13 @@
         "on-scroll-up": "shift_up",
         "on-scroll-down": "shift_down"
       }
+  },
+  "custom/weather": {
+      "format": "{}",
+      "tooltip": true,
+      "interval": 900,
+      "exec": "~/.config/hypr/scripts/weather.py",
+      "return-type": "json"
   },
   "custom/power":{
     "format": "",

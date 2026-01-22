@@ -58,6 +58,7 @@ OFFICIAL_PACKAGES=(
     neovim
     network-manager-applet
     openai-codex
+    python-requests # dependency for weather script
     qt5-declarative
     qt5-quickcontrols2
     qt6-svg

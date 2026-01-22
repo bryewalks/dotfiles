@@ -184,8 +184,8 @@ def main():
         temp_f = c_to_f(temp_c)
         feels_like_f = c_to_f(feels_like_c)
         lines.append(
-            f" <span foreground='{temp_to_color(temp_f)}'><b>{temp_f:.1f}°F</b></span> "
-            f"(Feels <span foreground='{temp_to_color(feels_like_f)}'>{feels_like_f:.1f}°F</span>)"
+            f" <span foreground='{temp_to_color(temp_f)}'><b>{temp_f:.0f}°F</b></span> "
+            f"(Feels <span foreground='{temp_to_color(feels_like_f)}'>{feels_like_f:.0f}°F</span>)"
         )
         lines.append(f"  {daily['sunrise'][0].split('T')[1]}   {daily['sunset'][0].split('T')[1]}")
         lines.append("")
@@ -217,7 +217,7 @@ def main():
                 time_str = dt_h.strftime(f"{clock_icon} %I:%M %p")
                 label_col = f"{time_str:<12}"
                 rain_col = f"<span foreground='{rain_color}'> {h_prob:>2}%</span>"
-                temp_col = f"<span foreground='{temp_to_color(h_temp_f)}'> {h_temp_f:>5.2f}°F</span>"
+                temp_col = f"<span foreground='{temp_to_color(h_temp_f)}'> {h_temp_f:>3.0f}°F</span>"
 
                 lines.append(f"<span font_family='monospace'>{label_col}  {rain_col}  {temp_col}  {h_icon:<2} {h_desc}</span>")
 
@@ -235,7 +235,7 @@ def main():
                 rain_color = COLORS['blue'] if t_prob > 0 else COLORS['bright_black']
                 label_col = f"{glyph} {label_text:<10}"
                 rain_col = f"<span foreground='{rain_color}'> {t_prob:>2}%</span>"
-                temp_col = f"<span foreground='{temp_to_color(t_temp_f)}'> {t_temp_f:>5.2f}°F</span>"
+                temp_col = f"<span foreground='{temp_to_color(t_temp_f)}'> {t_temp_f:>3.0f}°F</span>"
                 lines.append(f"<span font_family='monospace'>{label_col}  {rain_col}  {temp_col}  {t_icon:<2} {t_desc}</span>")
 
         # --- Extended Forecast ---
@@ -264,7 +264,7 @@ def main():
             lines.append(line)
             if i<6: lines.append("<span size='3000'> </span>")
 
-        lines.append(f"\n<span size='small' foreground='{COLORS['white']}'>🖱️LMB: Weather | 🖱️RMB: Radar</span>")
+        # lines.append(f"\n<span size='small' foreground='{COLORS['white']}'>🖱️LMB: Weather | 🖱️RMB: Radar</span>")
 
         print(json.dumps({
             "text": f"<span size='large'>{icon}</span> \u2009{temp_f:.0f}°F",

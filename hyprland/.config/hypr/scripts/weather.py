@@ -90,15 +90,15 @@ def get_uv_info(uv_index):
     return ("Extreme", "purple")
 
 def get_humidity_info(humidity):
-    if humidity < 20: return (" Extreme Dry  ", "red")
-    elif humidity < 30: return ("⚡ Very Dry ⚡", "red")
-    elif humidity < 40: return (" Pleasant ", "orange")
-    elif humidity < 50: return (" Perfect ", "green")
-    elif humidity < 60: return (" Little Bit Humid ", "blue")
-    elif humidity < 70: return (" Getting Sticky ", "blue")
-    elif humidity < 80: return (" Properly Humid Now ", "blue")
-    elif humidity < 90: return ("  Tropical Sauna Mode  ", "purple")
-    return ("🌊Basically Underwater🌊", "purple")
+    if humidity < 20: return ("Very Dry", "red")
+    elif humidity < 30: return ("Dry", "red")
+    elif humidity < 40: return ("Comfortable", "orange")
+    elif humidity < 50: return ("Ideal", "green")
+    elif humidity < 60: return ("Slightly Humid", "blue")
+    elif humidity < 70: return ("Humid", "blue")
+    elif humidity < 80: return ("High Humidity", "blue")
+    elif humidity < 90: return ("Very Humid", "purple")
+    return ("Extremely Humid", "purple")
 
 def calculate_fire_danger(temp, humidity, wind_kph):
     if humidity > 70: return ("Low-Moderate", "green")
@@ -214,7 +214,7 @@ def main():
 
                 rain_color = COLORS['blue'] if h_prob > 0 else COLORS['bright_black']
                 clock_icon = clocks[dt_h.hour % 12]
-                time_str = dt_h.strftime(f"{clock_icon} %I:%M %p")
+                time_str = dt_h.strftime(f"{clock_icon} %H:%M")
                 label_col = f"{time_str:<12}"
                 rain_col = f"<span foreground='{rain_color}'> {h_prob:>2}%</span>"
                 temp_col = f"<span foreground='{temp_to_color(h_temp_f)}'> {h_temp_f:>3.0f}°F</span>"
@@ -223,7 +223,7 @@ def main():
 
         # --- Tomorrow ---
         lines.append(f"\n<span foreground='{COLORS['green']}'><b> Tomorrow</b></span>")
-        time_data = {7: ("󰖜","Morning"),12:("󰖙","Midday"),17:("󰖚","Arvo"),21:("󰖔","Evening")}
+        time_data = {7: ("󰖜","Morning"),12:("󰖙","Midday"),17:("󰖚","Afternoon"),21:("󰖔","Evening")}
 
         for i in range(24,48):
             dt = datetime.fromisoformat(hourly["time"][i])

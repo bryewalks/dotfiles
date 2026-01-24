@@ -324,7 +324,6 @@ install_hyprland_plugins() {
     log_step "Installing Hyprland plugins"
     HYPRLAND_REPOS=(
         https://github.com/hyprwm/hyprland-plugins
-        https://github.com/bryewalks/hyprfocus
         https://github.com/bryewalks/hyprland-easymotion
         https://github.com/virtcode/hypr-dynamic-cursors
     )
@@ -340,6 +339,8 @@ install_hyprland_plugins() {
 
     if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
         log_step "Enabling Hyprland plugins"
+
+        hyprpm update
         hyprpm enable "$HYPRLAND_PLUGINS"
 
         log_ok "Hyprland plugins enabled"
